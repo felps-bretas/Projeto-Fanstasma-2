@@ -2,36 +2,419 @@
 title: "Modelo Projeto - Quarto"
 
 # Nome do documento PDF gerado
-output-file: titulo do projeto
+output-file: Projeto Fantasma
 ---
+
 ```{r}
 #| include: false
 source("rdocs/source/packages.R")
 ```
 
-
 ```{r}
-# Rodar apenas uma vez na vida!
-## Instalando o tinytex(pacote apenas)
-### CRAN version
-install.packages('tinytex')
+#| echo: false
+#| warning: false
+setwd("~/GitHub/Projeto-Fanstasma-2")
+library(tidyverse)
+library(readxl)
+library(rcompanion)
+library(ggplot2)
+Olimpiadas_A <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
+                           sheet = "Athina")
+Olimpiadas_L <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
+                                   sheet = "London")
+Olimpiadas_RJ <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
+                                   sheet = "Rio de Janeiro")
+Olimpiadas_S <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
+                                   sheet = "Sydney")
+Olimpiadas_B <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
+                                   sheet = "Beijing")
+Olimpiadas_A <- Olimpiadas_A%>%
+  filter(!is.na(Olimpiadas_A$Medal))
+Olimpiadas_L <- Olimpiadas_L%>%
+  filter(!is.na(Olimpiadas_L$Medal))
+Olimpiadas_RJ <- Olimpiadas_RJ%>%
+  filter(!is.na(Olimpiadas_RJ$Medal))
+Olimpiadas_S <- Olimpiadas_S%>%
+  filter(!is.na(Olimpiadas_S$M3d4l))
+Olimpiadas_B <- Olimpiadas_B%>%
+  filter(!is.na(Olimpiadas_B$Medal))
 
-### or the development version on GitHub
-remotes::install_github('rstudio/tinytex')
+colnames(Olimpiadas_A) <- c("Nomes","Sexo","Idade","Altura (cm)",
+                            "Peso (lbs)","País","Esporte",
+                            "Evento","Medalha")
+colnames(Olimpiadas_L) <- c("Nomes","Sexo","Idade","Altura (cm)",
+                            "Peso (lbs)","País","Esporte",
+                            "Evento","Medalha")
+colnames(Olimpiadas_RJ) <- c("Nomes","Sexo","Idade","Altura (cm)",
+                            "Peso (lbs)","País","Esporte",
+                            "Evento","Medalha")
+colnames(Olimpiadas_S) <- c("Nomes","Sexo","Idade","Altura (cm)",
+                            "Peso (lbs)","País","Esporte",
+                            "Evento","Medalha")
+colnames(Olimpiadas_B) <- c("Nomes","Sexo","Idade","Altura (cm)",
+                            "Peso (lbs)","País","Esporte",
+                            "Evento","Medalha")
 
-## Baixando o tinytex
-library(tinytex)
-tinytex::install_tinytex()
+Olimpiadas_2000_2016 <- rbind(Olimpiadas_A,Olimpiadas_B,Olimpiadas_L,
+                              Olimpiadas_RJ,Olimpiadas_S)
+
+estat_colors <- c(
+  "#A11D21", "#003366", "#CC9900",
+  "#663333", "#FF6600", "#CC9966",
+  "#999966", "#006606", "#008091",
+  "#041835", "#666666" )
+
+theme_estat <- function(...) {
+  theme <- ggplot2::theme_bw() +
+    ggplot2::theme(
+      axis.title.y = ggplot2::element_text(colour = "black", size = 12),
+      axis.title.x = ggplot2::element_text(colour = "black", size = 12),
+      axis.text = ggplot2::element_text(colour = "black", size = 9.5)
+      ,
+      panel.border = ggplot2::element_blank(),
+      axis.line = ggplot2::element_line(colour = "black"),
+      legend.position = "top",
+      ...
+    )
+  return(
+    list(
+      theme,
+      scale_fill_manual(values = estat_colors),
+      scale_colour_manual(values = estat_colors)
+    )
+  )
+}
+
+#Analise 1
+
+mulheres<-Olimpiadas_2000_2016[,c(2,6,9)]
+mulheres2<-mulheres[mulheres$Sexo=="F",]
+
+medalhas <- mulheres2 %>%
+  filter(!is.na(Medalha)) %>%
+  count(País) %>%
+  mutate(
+    freq = n,
+    relative_freq = round((freq / sum(freq)) * 100, 1),
+    freq = gsub("\\.", ",", relative_freq) %>% paste("%", sep = ""),
+    label = str_c(n, " (", freq, ")") %>% str_squish()
+  )
+
+medalhas2<-medalhas[medalhas$n>=220,]
+medalhas2[1,1] <- "Austrália"
+medalhas2[3,1] <- "Alemanha"
+medalhas2[4,1] <- "Rússia"
+medalhas2[5,1] <- "Estados Unidos"
+
+#Analise 2
+
+Olimpiadas_2000_2016$`Altura (m)` <- ((Olimpiadas_2000_2016$`Altura (cm)`)/100)
+Olimpiadas_2000_2016$`Peso (kg)` <- round(((Olimpiadas_2000_2016$`Peso (lbs)`)*
+                                         0.453592),2)
+Olimpiadas_2000_2016$IMC <- round(((Olimpiadas_2000_2016$`Peso (kg)`)/
+                               (Olimpiadas_2000_2016$`Altura (m)`**2)),2)
+
+IMC_por_esporte <- Olimpiadas_2000_2016[,c(1,2,3,6,7,10,11,12)]
+IMC_por_esporte <- filter(IMC_por_esporte,Esporte %in% c("Gymnastics",
+                                                       "Football","Judo",
+                                                       "Athletics",
+                                                       "Badminton"))
+
+IMC_por_esporte[IMC_por_esporte$Esporte=="Athletics",5] <- "Atletismo"
+IMC_por_esporte[IMC_por_esporte$Esporte=="Football",5] <- "Futebol"
+IMC_por_esporte[IMC_por_esporte$Esporte=="Gymnastics",5] <- "Ginástica"
+IMC_por_esporte[IMC_por_esporte$Esporte=="Judo",5] <- "Judô"
 
 
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(`Altura (m)`))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(`Peso (kg)`))
+
+#Analise 3
+
+total_med <- Olimpiadas_2000_2016[,c(1,9)]
+
+total_med2 <- total_med %>%
+  count(Medalha,Nomes) %>%
+  mutate(
+    freq = n,
+    label = str_c(n) %>% str_squish()
+  )
+total_med2 <- arrange(total_med2, desc(n))
+total_med2 <- filter(total_med2,Nomes %in% c("Ryan Steven Lochte",
+                                             "Michael Fred Phelps, II",
+                                             "Natalie Anne Coughlin (-Hall)"))
+
+tm <- Olimpiadas_2000_2016[,1]
+total_med3 <- tm %>%
+  count(Nomes) %>%
+  mutate(
+    freq = n,
+    label = str_c(n) %>% str_squish()
+  )
+total_med3 <- arrange(total_med3, desc(n))
+total_med3 <- filter(total_med3,Nomes %in% c("Ryan Steven Lochte",
+                                             "Michael Fred Phelps, II",
+                                             "Natalie Anne Coughlin (-Hall)"))
+
+total <- left_join(total_med2, total_med3, by = "Nomes")
+total <- total[,c(1,2,3,6)]
+colnames(total) <- c("Medalha", "Nomes", "freq", "total")
+total[total$Medalha=="Gold",1] <- "Ouro"
+total[total$Medalha=="Silver",1] <- "Prata"
+total[total$Nomes=="Michael Fred Phelps, II",2] <- "Michael Phelps"
+total[total$Nomes=="Ryan Steven Lochte",2] <- "Ryan Lochte"
+total[total$Nomes=="Natalie Anne Coughlin (-Hall)",2] <- "Natalie Coughlin"
+total$`freq relativa` <- round((total$freq/total$total) * 100, 1)
 ```
-
-
 
 # Introdução
 
+Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho dos atletas de elite da academia de alta performance “House of Excellence”.
+
+O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis para a confecção da análise, possuindo variáveis tanto qualitativas quantoi quantitivas.
+
+O software utilizado para a realização desta análise é o R, sendo este um software livre em sua versão 4.3.3.
+
 # Referencial Teórico
 
+## Média
+
+A média é a soma das observações dividida pelo número total delas, dada pela fórmula:
+
+$$\bar{X}=\frac{\sum\limits_{i=1}^{n}X_i}{n}$$
+
+Com:
+
+-   $i = 1, \, 2, \, ..., \, n$
+
+-   $n =$ número total de observações
+
+## Mediana
+
+Sejam as $n$ observações de um conjunto de dados $X=X_{(1)},X_{(2)},\ldots, X_{(n)}$ de determinada variável ordenadas de forma crescente. A mediana do conjunto de dados $X$ é o valor que deixa metade das observações abaixo dela e metade dos dados acima.
+
+Com isso, pode-se calcular a mediana da seguinte forma:
+
+$$
+med(X) =
+    \begin{cases}
+         X_{\frac{n+1}{2}}, \textrm{para n ímpar} \\
+         \frac{X_{\frac{n}{2}}+X_{\frac{n}{2} + 1}}{2}, \textrm{para n par} \\
+    \end{cases}
+$$
+## Quartis
+
+Os quartis são separatrizes que dividem o conjunto de dados em quatro partes iguais. O primeiro quartil (ou inferior) delimita os 25% menores valores, o segundo representa a mediana, e o terceiro delimita os 25% maiores valores. Inicialmente deve-se calcular a posição do quartil:
+
+-   Posição do primeiro quartil $P_1$: $$P_1=\frac{n+1}{4}$$
+
+-   Posição da mediana (segundo quartil) $P_2$: $$P_2 = \frac{n+1}{2}$$
+
+-   Posição do terceiro quartil $P_3$: $$P_3=\frac{3 \times (n+1)}{4}$$
+
+Com $n$ sendo o tamanho da amostra. Dessa forma, $X_{\left( P_i \right)}$ é o valor do $i$-ésimo quartil, onde $X_{\left( j \right)}$ representa a $j$-ésima observação dos dados ordenados.
+
+Se o cálculo da posição resultar em uma fração, deve-se fazer a média entre o valor que está na posição do inteiro anterior e do seguinte ao da posição.
+
+## Variância
+
+A variância é uma medida que avalia o quanto os dados estão dispersos em relação à média, em uma escala ao quadrado da escala dos dados.
+
+### Variância Populacional
+
+Para uma população, a variância é dada por:
+
+$$\sigma^2=\frac{\sum\limits_{i=1}^{N}\left(X_i - \mu\right)^2}{N}$$
+
+Com:
+
+-   $X_i =$ $i$-ésima observação da população
+
+-   $\mu =$ média populacional
+
+-   $N =$ tamanho da população
+
+### Variância Amostral
+
+Para uma amostra, a variância é dada por:
+
+$$S^2=\frac{\sum\limits_{i=1}^{n}\left(X_i - \bar{X}\right)^2}{n-1}$$
+
+Com:
+
+-   $X_i =$ i-ésima observação da amostra
+
+-   $\bar{X} =$ média amostral
+
+-   $n =$ tamanho da amostra
+
+## Desvio Padrão
+
+O desvio padrão é a raiz quadrada da variância. Ele avalia o quanto os dados estão dispersos em relação à média.
+
+### Desvio Padrão Populacional
+
+Para uma população, o desvio padrão é dado por:
+
+$$\sigma=\sqrt{\frac{\sum\limits_{i=1}^{N}\left(X_i - \mu\right)^2}{N}}$$
+
+Com:
+
+-   $X_i =$ i-ésima observação da população
+
+-   $\mu =$ média populacional
+
+-   $N =$ tamanho da população
+
+### Desvio Padrão Amostral
+
+Para uma amostra, o desvio padrão é dado por:
+
+$$S=\sqrt{\frac{\sum\limits_{i=1}^{n}\left(X_i - \bar{X}\right)^2}{n-1}}$$
+
+Com:
+
+-   $X_i =$ i-ésima observação da amostra
+
+-   $\bar{X} =$ média amostral
+
+-   $n =$ tamanho da amostra
+
+## Boxplot
+
+O boxplot é uma representação gráfica na qual se pode perceber de forma mais clara como os dados estão distribuídos. A figura abaixo ilustra um exemplo de boxplot.
+
+![Exemplo de boxplot](images/box_uni.png){fig-align="center"}
+
+A porção inferior do retângulo diz respeito ao primeiro quartil, enquanto a superior indica o terceiro quartil. Já o traço no interior do retângulo representa a mediana do conjunto de dados, ou seja, o valor em que o conjunto de dados é dividido em dois subconjuntos de mesmo tamanho. A média é representada pelo losango branco e os pontos são *outliers*. Os *outliers* são valores discrepantes da série de dados, ou seja, valores que não demonstram a realidade de um conjunto de dados.
+
+## Histograma
+
+O histograma é uma representação gráfica utilizada para a visualização da distribuição dos dados e pode ser construído por valores absolutos, frequência relativa ou densidade. A figura abaixo ilustra um exemplo de histograma.
+
+![Exemplo de histograma](images/hist_uni.png){fig-align="center"}
+
+## Gráfico de Dispersão
+
+O gráfico de dispersão é uma representação gráfica utilizada para ilustrar o comportamento conjunto de duas variáveis quantitativas. A figura abaixo ilustra um exemplo de gráfico de dispersão, onde cada ponto representa uma observação do banco de dados.
+
+![Exemplo de Gráfico de Dispersão](images/disp_uni.png){fig-align="center"}
+
+## Tipos de Variáveis
+
+### Qualitativas
+
+As variáveis qualitativas são as variáveis não numéricas, que representam categorias ou características da população. Estas subdividem-se em:
+
+-   **Nominais**: quando não existe uma ordem entre as categorias da variável (exemplos: sexo, cor dos olhos, fumante ou não, etc)
+-   **Ordinais**: quando existe uma ordem entre as categorias da variável (exemplos: nível de escolaridade, mês, estágio de doença, etc)
+
+### Quantitativas
+
+As variáveis quantitativas são as variáveis numéricas, que representam características numéricas da população, ou seja, quantidades. Estas subdividem-se em:
+
+-   **Discretas**: quando os possíveis valores são enumeráveis (exemplos: número de filhos, número de cigarros fumados, etc)
+-   **Contínuas**: quando os possíveis valores são resultado de medições (exemplos: massa, altura, tempo, etc)
+
 # Análises
+
+## Análise 1
+
+Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, o investimento se tornou ainda maior.
+
+Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente, o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes ouro, prata ou bronze; e o país que o atleta representou.
+
+Este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
+
+```{r}
+#| label: figura-1
+#| fig-cap: "Gráfico de colunas do total de medalhas femininas por país"
+
+ggplot(medalhas2) +
+  aes(x = fct_reorder(País, n, .desc=T), y = n, label = label) +
+  geom_bar(stat = "identity", fill = "#A11D21", width = 0.7) +
+  geom_text(
+    position = position_dodge(width = .9),
+    vjust = -0.5, #hjust = .5,
+    size = 3
+  ) +
+  labs(x = "Países", y = "Frequência de Medalhistas") +
+  theme_estat()
+ggsave("colunas-uni-freq.pdf", width = 158, height = 93, units = "mm"
+)
+```
+
+Como pode ser observado pelo @figura-1, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
+
+Algo que também pode ser observado é a grande variedade de continentes presentes dentro do top 5 medalhistas femininas, sendo estes: América, Europa, Ásia e Oceania, mostrando que existe uma grande variedade muito grande entre as atletas ganhadoras.
+
+Essa diferença pode ser explicada pelo alto investimento que os Estados Unidos faz em suas atletas desde a infância, as incentivando a patricarem esportes de alto rendimento em toda sua fase de educação.
+
+Algo que também deve ser obersvado é a frequência relativa acumulada entre esses 5 países mais vencedores os quais equivalem à 46,7% do total de medalhas ganhas por atletas femininas em todas as Olimpíadas em análise.
+
+## Análise 2
+
+O Índice de Massa Corporal, mais conhecido como IMC, é uma medida internacional adotada para verificar se uma pessoa estaria numa certa faixa de "peso ideal". Esse índice varia por diversos aspectos e, entre um deles, está se a pessoal pratica ou não algum esporte.
+
+Para está análise, foram utilizadas as váriaveis: "Altura (cm)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em centímetros; peso de cada atleta em quilogramas; esporte que o competidor participou.
+
+A fim de tentar compreender melhor essa relação, foi feita uma análise descritiva entre alguns dos esportes olímpicos e seus atletas, demonstrado pela figura abaixo:
+
+```{r}
+#| echo: false
+#| label: figura-2
+#| fig-cap: "Boxplot do IMC por esporte"
+
+ggplot(IMC_por_esporte) +
+  aes(x = reorder(Esporte, IMC, FUN = median), y = IMC) +
+  geom_boxplot(fill = c("#A11D21"), width = 0.5) +
+  stat_summary(
+    fun = "mean", geom = "point", shape = 23, size = 3, fill = "white") +
+  labs(x = "Esporte", y = "IMC por atleta (kg/m²)") +
+  theme_estat()
+```
+
+Como pode ser observado pelo @figura-2, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
+
+Algo que também vale a pena ser obversado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana de IMC por atletas por esporte.
+
+## Análise 3
+
+O sonho de cada atleta que adentra uma Olimpíadas é conquistar alguma medalha para seu país. Para isso é necessário anos de dedicação, treinos intensos e muito talento para ter uma chance de conquistar a tão sonhada medalha. Graças à combinação de todos esses fatores, existem competidores que conseguem atingir um maior sucesso que os demais, adquirindo um grande total de medalhas ao longo de vários anos.
+
+A fim de tentar entender melhor quais são os atletas que possuem mais medalhas entre as Olimpíadas de 2000 até 2016, foi feita uma análise descritiva utilizando as váriaveis: "Nomes" (qualitativa nominal), "Medalha" (qualitativa ordinal), significando respectivamente: o nome dos atletas participantes; medalha conquistada e seu tipo, sendo estes, ouro, prata e bronze. Além dessas variáveis, foi utilizado a figura a seguir:
+
+```{r}
+#| echo: false
+#| label: figura-3
+#| fig-cap: "Gráfico de colunas de medalhas por atleta"
+
+porcentagens <- str_c(total$`freq relativa`, "%") %>% str_replace("
+\\.", ",")
+legendas <- str_squish(str_c(total$freq, " (", porcentagens, ")")
+)
+ggplot(total) +
+  aes(
+    x = fct_reorder(Nomes, Medalha, .desc = T), y = freq,
+    fill = Medalha, label = legendas) +
+  geom_col(position = position_dodge2(preserve = "single", padding =
+                                        0)) +
+  geom_text(
+    position = position_dodge(width = .9),
+    vjust = -0.5, hjust = 0.5,
+    size = 3.0
+    
+  ) +
+  labs(x = "Atletas", y = "Frequência") +
+  theme_estat()
+```
+
+Como pode ser observado pela @figura-3, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
+
+Nesta análise também foi estudado se há ou não uma associação entre o tipo da medalha e o atleta que a conquistou e para isso, foi utilizado o Coeficiente de Contingêcia Modificado, C\*=0,2719, evidenciando uma associação moderada.
+
+Graças ao Coeficiente estudado, podemos dizer que uma certa relação entre o tipo da medalha conquistada e atleta que a conquistou, mostrando que o talento individual, além de anos de treino e esforço, pode ser um fator determinante quanto o assunto se trata de uma conquista grande.
 
 # Conclusões
