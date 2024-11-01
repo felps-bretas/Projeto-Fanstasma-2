@@ -1,5 +1,5 @@
 ---
-title: "Modelo Projeto - Quarto"
+title: "Relatório Olimpíadas 2000 - 2016"
 
 # Nome do documento PDF gerado
 output-file: Projeto Fantasma
@@ -203,8 +203,7 @@ med(X) =
          X_{\frac{n+1}{2}}, \textrm{para n ímpar} \\
          \frac{X_{\frac{n}{2}}+X_{\frac{n}{2} + 1}}{2}, \textrm{para n par} \\
     \end{cases}
-$$
-## Quartis
+$$ \## Quartis
 
 Os quartis são separatrizes que dividem o conjunto de dados em quatro partes iguais. O primeiro quartil (ou inferior) delimita os 25% menores valores, o segundo representa a mediana, e o terceiro delimita os 25% maiores valores. Inicialmente deve-se calcular a posição do quartil:
 
