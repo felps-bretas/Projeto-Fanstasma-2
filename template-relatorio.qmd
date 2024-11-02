@@ -167,6 +167,25 @@ total[total$Nomes=="Michael Fred Phelps, II",2] <- "Michael Phelps"
 total[total$Nomes=="Ryan Steven Lochte",2] <- "Ryan Lochte"
 total[total$Nomes=="Natalie Anne Coughlin (-Hall)",2] <- "Natalie Coughlin"
 total$`freq relativa` <- round((total$freq/total$total) * 100, 1)
+
+total_med4 <- filter(total_med,Nomes %in% c("Ryan Steven Lochte",
+                                             "Michael Fred Phelps, II",
+                                             "Natalie Anne Coughlin (-Hall)"))
+
+tabela <- xtabs(~total_med4$Nomes+total_med4$Medalha)
+tabela
+
+#Analise 4
+
+peso_altura <- Olimpiadas_2000_2016[,c(10,11)]
+
+peso_altura <- peso_altura %>%
+  filter(!is.na(`Altura (m)`))
+peso_altura <- peso_altura %>%
+  filter(!is.na(`Peso (kg)`))
+
+cor(peso_altura$`Peso (kg)`,peso_altura$`Altura (m)`,method = "spearman")
+
 ```
 
 # Introdução
@@ -178,6 +197,28 @@ O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra p
 O software utilizado para a realização desta análise é o R, sendo este um software livre em sua versão 4.3.3.
 
 # Referencial Teórico
+
+## Frequência Relativa
+
+A frequência relativa é utilizada para a comparação entre classes de uma variável categórica com $c$ categorias, ou para comparar uma mesma categoria em diferentes estudos.
+
+A frequência relativa da categoria $j$ é dada por:
+
+$$
+f_j=\frac{n_j}{n}
+$$
+
+Com:
+
+-   $j = 1, \, ..., \, c$
+
+-   $n_j =$ número de observações da categoria $j$
+
+-   $n =$ número total de observações
+
+Geralmente, a frequência relativa é utilizada em porcentagem, dada por:
+
+$$100 \times f_j$$
 
 ## Média
 
@@ -289,12 +330,6 @@ O boxplot é uma representação gráfica na qual se pode perceber de forma mais
 
 A porção inferior do retângulo diz respeito ao primeiro quartil, enquanto a superior indica o terceiro quartil. Já o traço no interior do retângulo representa a mediana do conjunto de dados, ou seja, o valor em que o conjunto de dados é dividido em dois subconjuntos de mesmo tamanho. A média é representada pelo losango branco e os pontos são *outliers*. Os *outliers* são valores discrepantes da série de dados, ou seja, valores que não demonstram a realidade de um conjunto de dados.
 
-## Histograma
-
-O histograma é uma representação gráfica utilizada para a visualização da distribuição dos dados e pode ser construído por valores absolutos, frequência relativa ou densidade. A figura abaixo ilustra um exemplo de histograma.
-
-![Exemplo de histograma](images/hist_uni.png){fig-align="center"}
-
 ## Gráfico de Dispersão
 
 O gráfico de dispersão é uma representação gráfica utilizada para ilustrar o comportamento conjunto de duas variáveis quantitativas. A figura abaixo ilustra um exemplo de gráfico de dispersão, onde cada ponto representa uma observação do banco de dados.
@@ -316,6 +351,25 @@ As variáveis quantitativas são as variáveis numéricas, que representam carac
 
 -   **Discretas**: quando os possíveis valores são enumeráveis (exemplos: número de filhos, número de cigarros fumados, etc)
 -   **Contínuas**: quando os possíveis valores são resultado de medições (exemplos: massa, altura, tempo, etc)
+
+## Coeficiente de Correlação de Spearman
+
+O coeficiente de correlação de Spearman é uma medida não paramétrica que verifica, através de postos de variáveis quantitativas ou qualitativas ordinais, o grau de relação linear entre duas variáveis. Este coeficiente varia entre os valores -1 e 1. O valor zero significa que não há relação linear entre as variáveis. Quando o valor do coeficiente $\rho$ é negativo, diz-se existir uma relação de grandeza inversamente proporcional entre as variáveis. Analogamente, quando $\rho$ é positivo, diz-se que as duas variáveis são diretamente proporcionais.
+
+O coeficiente é calculado da seguinte maneira:
+
+$$
+\rho_{Spearman} = \frac{ \displaystyle \sum_{i=1}^{n}  \left[\left(R(x_i)-\frac{n+1}{2}\right)\left(R(y_i)-\frac{n+1}{2}\right)\right]}
+{\sqrt{\displaystyle \sum_{i=1}^{n}  \left(R(x_i)^2\right)-n\left(\frac{n+1}{2}\right)^{2}}  \times \sqrt{\displaystyle \sum_{i=1}^{n}  \left(R(y_i)^2 \right) -n\left(\frac{n+1}{2}\right)^{2}}}
+$$
+
+Onde:
+
+-   $x_i =$ i-ésimo valor da variável $X$
+-   $y_i =$ i-ésimo valor da variável $Y$
+-   $R(x_i) =$ posto relativo à observação $i$ de $X$
+-   $R(y_i) =$ posto relativo à observação $i$ de $Y$
+-   $n =$ número total de observações na amostra
 
 # Análises
 
@@ -371,7 +425,7 @@ ggplot(IMC_por_esporte) +
   geom_boxplot(fill = c("#A11D21"), width = 0.5) +
   stat_summary(
     fun = "mean", geom = "point", shape = 23, size = 3, fill = "white") +
-  labs(x = "Esporte", y = "IMC por atleta (kg/m²)") +
+  labs(x = "Esporte", y = "Índice de Massa Corporal") +
   theme_estat()
 ```
 
@@ -415,5 +469,33 @@ Como pode ser observado pela @figura-3, o atleta Michael Phelps é quem detem o 
 Nesta análise também foi estudado se há ou não uma associação entre o tipo da medalha e o atleta que a conquistou e para isso, foi utilizado o Coeficiente de Contingêcia Modificado, C\*=0,2719, evidenciando uma associação moderada.
 
 Graças ao Coeficiente estudado, podemos dizer que uma certa relação entre o tipo da medalha conquistada e atleta que a conquistou, mostrando que o talento individual, além de anos de treino e esforço, pode ser um fator determinante quanto o assunto se trata de uma conquista grande.
+
+## Análise 4
+
+Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos.
+
+A fim de tentar compreender melhor essa possível relação, foi feita uma análise descrita, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa discreta) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para está compreender melhor está análise foi feita a seguinte figura:
+
+```{r}
+#| label: figura-4
+#| fig-cap: "Gráfico de dispersão do peso pela altura"
+
+ggplot(peso_altura) +
+  aes(x = `Peso (kg)`, y = `Altura (m)`) +
+  geom_point(colour = "#A11D21", size = 3) +
+  labs(
+    x = "Peso",
+    y = "Altura"
+  ) +
+  theme_estat() +
+  geom_jitter(colour = "#A11D21", size = 3)
+
+```
+
+Como pode ser observado pela @figura-4, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
+
+Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,841, demonstrando que existe uma relação forte entre o peso e a altuira das pessoas.
+
+Essa grande correlação pode ser explicada pelo fato de quanto mais alto é o indivíduo, os músculos e a estrutura óssea dessa pessoa também tendem a ser maiores, gerando assim um maior valor de peso para tal.
 
 # Conclusões
