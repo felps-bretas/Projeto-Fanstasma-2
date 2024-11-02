@@ -187,22 +187,6 @@ cor(peso_altura$`Peso (kg)`,peso_altura$`Altura (m)`,method = "spearman")
 
 ```
 
-```{r}
-# Rodar apenas uma vez na vida!
-## Instalando o tinytex(pacote apenas)
-### CRAN version
-install.packages('tinytex')
-
-### or the development version on GitHub
-remotes::install_github('rstudio/tinytex')
-
-## Baixando o tinytex
-library(tinytex)
-tinytex::install_tinytex()
-
-
-```
-
 # Introdução
 
 Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho dos atletas de elite da academia de alta performance “House of Excellence”.
