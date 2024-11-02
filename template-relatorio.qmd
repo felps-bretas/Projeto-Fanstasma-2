@@ -173,7 +173,6 @@ total_med4 <- filter(total_med,Nomes %in% c("Ryan Steven Lochte",
                                              "Natalie Anne Coughlin (-Hall)"))
 
 tabela <- xtabs(~total_med4$Nomes+total_med4$Medalha)
-tabela
 
 #Analise 4
 
@@ -185,6 +184,22 @@ peso_altura <- peso_altura %>%
   filter(!is.na(`Peso (kg)`))
 
 cor(peso_altura$`Peso (kg)`,peso_altura$`Altura (m)`,method = "spearman")
+
+```
+
+```{r}
+# Rodar apenas uma vez na vida!
+## Instalando o tinytex(pacote apenas)
+### CRAN version
+install.packages('tinytex')
+
+### or the development version on GitHub
+remotes::install_github('rstudio/tinytex')
+
+## Baixando o tinytex
+library(tinytex)
+tinytex::install_tinytex()
+
 
 ```
 
