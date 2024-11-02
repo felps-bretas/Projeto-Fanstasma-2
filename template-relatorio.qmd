@@ -381,7 +381,7 @@ Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (quali
 Este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
 
 ```{r}
-#| label: figura-1
+#| label: figura-3
 #| fig-cap: "Gráfico de colunas do total de medalhas femininas por país"
 
 ggplot(medalhas2) +
@@ -398,7 +398,7 @@ ggsave("colunas-uni-freq.pdf", width = 158, height = 93, units = "mm"
 )
 ```
 
-Como pode ser observado pelo @figura-1, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
+Como pode ser observado pelo @figura-3, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
 
 Algo que também pode ser observado é a grande variedade de continentes presentes dentro do top 5 medalhistas femininas, sendo estes: América, Europa, Ásia e Oceania, mostrando que existe uma grande variedade muito grande entre as atletas ganhadoras.
 
@@ -416,7 +416,7 @@ A fim de tentar compreender melhor essa relação, foi feita uma análise descri
 
 ```{r}
 #| echo: false
-#| label: figura-2
+#| label: figura-4
 #| fig-cap: "Boxplot do IMC por esporte"
 
 ggplot(IMC_por_esporte) +
@@ -428,7 +428,7 @@ ggplot(IMC_por_esporte) +
   theme_estat()
 ```
 
-Como pode ser observado pelo @figura-2, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
+Como pode ser observado pelo @figura-4, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
 
 Algo que também vale a pena ser obversado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana de IMC por atletas por esporte.
 
@@ -440,7 +440,7 @@ A fim de tentar entender melhor quais são os atletas que possuem mais medalhas 
 
 ```{r}
 #| echo: false
-#| label: figura-3
+#| label: figura-5
 #| fig-cap: "Gráfico de colunas de medalhas por atleta"
 
 porcentagens <- str_c(total$`freq relativa`, "%") %>% str_replace("
@@ -463,7 +463,7 @@ ggplot(total) +
   theme_estat()
 ```
 
-Como pode ser observado pela @figura-3, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
+Como pode ser observado pela @figura-5, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
 
 Nesta análise também foi estudado se há ou não uma associação entre o tipo da medalha e o atleta que a conquistou e para isso, foi utilizado o Coeficiente de Contingêcia Modificado, C\*=0,2719, evidenciando uma associação moderada.
 
@@ -476,7 +476,7 @@ Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento 
 A fim de tentar compreender melhor essa possível relação, foi feita uma análise descrita, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa discreta) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para está compreender melhor está análise foi feita a seguinte figura:
 
 ```{r}
-#| label: figura-4
+#| label: figura-6
 #| fig-cap: "Gráfico de dispersão do peso pela altura"
 
 ggplot(peso_altura) +
@@ -491,7 +491,7 @@ ggplot(peso_altura) +
 
 ```
 
-Como pode ser observado pela @figura-4, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
+Como pode ser observado pela @figura-6, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
 
 Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,841, demonstrando que existe uma relação forte entre o peso e a altuira das pessoas.
 
