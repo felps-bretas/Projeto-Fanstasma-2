@@ -176,14 +176,14 @@ tabela <- xtabs(~total_med4$Nomes+total_med4$Medalha)
 
 #Analise 4
 
-peso_altura <- Olimpiadas_2000_2016[,c(10,11)]
+peso_altura <- Olimpiadas_2000_2016[,c(1,10,11)]
 
 peso_altura <- peso_altura %>%
   filter(!is.na(`Altura (m)`))
 peso_altura <- peso_altura %>%
   filter(!is.na(`Peso (kg)`))
 
-cor(peso_altura$`Peso (kg)`,peso_altura$`Altura (m)`,method = "spearman")
+peso_altura <- distinct(peso_altura)
 
 ```
 
@@ -372,7 +372,7 @@ Onde:
 
 # Análises
 
-## Análise 1
+## Relação de medalhas femininas por país
 
 Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, o investimento se tornou ainda maior.
 
@@ -381,7 +381,7 @@ Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (quali
 Este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
 
 ```{r}
-#| label: figura-3
+#| label: fig-3
 #| fig-cap: "Gráfico de colunas do total de medalhas femininas por país"
 
 ggplot(medalhas2) +
@@ -398,7 +398,7 @@ ggsave("colunas-uni-freq.pdf", width = 158, height = 93, units = "mm"
 )
 ```
 
-Como pode ser observado pelo @figura-3, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
+Como pode ser observado pelo @fig-3, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
 
 Algo que também pode ser observado é a grande variedade de continentes presentes dentro do top 5 medalhistas femininas, sendo estes: América, Europa, Ásia e Oceania, mostrando que existe uma grande variedade muito grande entre as atletas ganhadoras.
 
@@ -406,7 +406,7 @@ Essa diferença pode ser explicada pelo alto investimento que os Estados Unidos 
 
 Algo que também deve ser obersvado é a frequência relativa acumulada entre esses 5 países mais vencedores os quais equivalem à 46,7% do total de medalhas ganhas por atletas femininas em todas as Olimpíadas em análise.
 
-## Análise 2
+## Relação do IMC por esporte
 
 O Índice de Massa Corporal, mais conhecido como IMC, é uma medida internacional adotada para verificar se uma pessoa estaria numa certa faixa de "peso ideal". Esse índice varia por diversos aspectos e, entre um deles, está se a pessoal pratica ou não algum esporte.
 
@@ -416,7 +416,7 @@ A fim de tentar compreender melhor essa relação, foi feita uma análise descri
 
 ```{r}
 #| echo: false
-#| label: figura-4
+#| label: fig-4
 #| fig-cap: "Boxplot do IMC por esporte"
 
 ggplot(IMC_por_esporte) +
@@ -428,11 +428,11 @@ ggplot(IMC_por_esporte) +
   theme_estat()
 ```
 
-Como pode ser observado pelo @figura-4, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
+Como pode ser observado pelo @fig-4, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
 
 Algo que também vale a pena ser obversado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana de IMC por atletas por esporte.
 
-## Análise 3
+## Relação entre medalhistas e o tipo de medalha
 
 O sonho de cada atleta que adentra uma Olimpíadas é conquistar alguma medalha para seu país. Para isso é necessário anos de dedicação, treinos intensos e muito talento para ter uma chance de conquistar a tão sonhada medalha. Graças à combinação de todos esses fatores, existem competidores que conseguem atingir um maior sucesso que os demais, adquirindo um grande total de medalhas ao longo de vários anos.
 
@@ -440,7 +440,7 @@ A fim de tentar entender melhor quais são os atletas que possuem mais medalhas 
 
 ```{r}
 #| echo: false
-#| label: figura-5
+#| label: fig-5
 #| fig-cap: "Gráfico de colunas de medalhas por atleta"
 
 porcentagens <- str_c(total$`freq relativa`, "%") %>% str_replace("
@@ -463,37 +463,36 @@ ggplot(total) +
   theme_estat()
 ```
 
-Como pode ser observado pela @figura-5, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
+Como pode ser observado pela @fig-5, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
 
 Nesta análise também foi estudado se há ou não uma associação entre o tipo da medalha e o atleta que a conquistou e para isso, foi utilizado o Coeficiente de Contingêcia Modificado, C\*=0,2719, evidenciando uma associação moderada.
 
 Graças ao Coeficiente estudado, podemos dizer que uma certa relação entre o tipo da medalha conquistada e atleta que a conquistou, mostrando que o talento individual, além de anos de treino e esforço, pode ser um fator determinante quanto o assunto se trata de uma conquista grande.
 
-## Análise 4
+## Relação entre peso e altura
 
-Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos.
+Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos. E nas Oimpíadas não é diferente, em muitos esportes, possuir uma certa faixa de peso ou uma altura maior, acaba se tornando uma vantagem.
 
-A fim de tentar compreender melhor essa possível relação, foi feita uma análise descrita, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa discreta) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para está compreender melhor está análise foi feita a seguinte figura:
+A fim de tentar compreender melhor essa possível relação, foi feita uma análise descrita, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa contínua) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para compreender melhor está análise foi feita a seguinte figura:
 
 ```{r}
-#| label: figura-6
+#| label: fig-6
 #| fig-cap: "Gráfico de dispersão do peso pela altura"
 
 ggplot(peso_altura) +
   aes(x = `Peso (kg)`, y = `Altura (m)`) +
-  geom_point(colour = "#A11D21", size = 3) +
+  geom_point(colour = "#A11D21", size = 3, alpha= 0.7) +
   labs(
     x = "Peso",
     y = "Altura"
   ) +
   theme_estat() +
-  geom_jitter(colour = "#A11D21", size = 3)
-
+  geom_jitter(colour = "#A11D21")
 ```
 
-Como pode ser observado pela @figura-6, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
+Como pode ser observado pela @fig-6, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
 
-Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,841, demonstrando que existe uma relação forte entre o peso e a altuira das pessoas.
+Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,832, demonstrando que existe uma relação forte e positiva entre o peso e a altura das pessoas, o qual mostra que as duas variáveis são diretamente proporcionais, ou seja, quanto maior a altura de um indivíduo, maior tende a ser sua altura.
 
 Essa grande correlação pode ser explicada pelo fato de quanto mais alto é o indivíduo, os músculos e a estrutura óssea dessa pessoa também tendem a ser maiores, gerando assim um maior valor de peso para tal.
 
