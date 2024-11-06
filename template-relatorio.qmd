@@ -129,6 +129,18 @@ IMC_por_esporte <- IMC_por_esporte %>%
   filter(!is.na(`Altura (m)`))
 IMC_por_esporte <- IMC_por_esporte %>%
   filter(!is.na(`Peso (kg)`))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(Nomes))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(IMC))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(Sexo))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(Idade))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(País))
+IMC_por_esporte <- IMC_por_esporte %>%
+  filter(!is.na(Esporte))
 
 #Analise 3
 
@@ -265,7 +277,7 @@ peso_altura %>%
 
 # Introdução
 
-Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho dos atletas de elite da academia de alta performance “House of Excellence”.
+Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, por meio de diversos gráficos, tabelas e quadros, sendo também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho e possíveis relações desses atletas de elite da academia de alta performance “House of Excellence”.
 
 O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis para a confecção da análise, possuindo variáveis tanto qualitativas quantoi quantitivas.
 
@@ -487,7 +499,7 @@ O Índice de Massa Corporal, mais conhecido como IMC, é uma medida internaciona
 
 Para está análise, foram utilizadas as váriaveis: "Altura (cm)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em centímetros; peso de cada atleta em quilogramas; esporte que o competidor participou.
 
-A fim de tentar compreender melhor essa relação, foi feita uma análise descritiva entre alguns dos esportes olímpicos e seus atletas, demonstrado pela figura abaixo:
+A fim de tentar compreender melhor essa relação, foi feita uma análise descritiva entre alguns dos esportes olímpicos e seus atletas, demonstrado pela figura e gráfico abaixo:
 
 ```{r}
 #| echo: false
@@ -504,15 +516,43 @@ ggplot(IMC_por_esporte) +
 
 ```
 
+```{=latex}
+
+\begin{quadro}[H]
+  \setlength{	\tabcolsep}{9pt}
+	\renewcommand{\arraystretch}{1.20}
+    \caption{Medidas resumo do Índice de Massa Corporal}
+    \centering
+    \begin{tabular}{ | l |S[table-format = 2.2]S[table-format = 1.2]S[table-format = 2.2]S[table-format = 2.2]S[table-format = 2.2]|}
+    \hline
+        \textbf{Estatística} & \textbf{Atletismo} & \textbf{Badminton} & \textbf{Futebol} & \textbf{Ginástica} & \textbf{Judô} \\
+        \hline
+        Média & 22.30 & 22.21 & 22.51 & 20.68 & 25.70 \\
+        Desvio Padrão & 3.86 & 1.50 & 1.73 & 2.38 & 5.12 \\
+        Variância & 14.92 &  2.26 &  2.99 &  5.67 & 26.24 \\
+        Mínimo & 15.82 & 18.94 & 16.73 & 15.16 & 18.52 \\
+        1º Quartil & 20.03 & 21.22 & 21.34 & 18.61 & 22.06 \\
+        Mediana & 21.45 & 22.28 & 22.49 & 21.09 & 24.68 \\
+        3º Quartil & 23.67 & 23.22 & 23.71 & 22.48 & 27.70 \\
+        Máximo & 44.38 & 26.73 & 29.07 & 26.45 & 56.50 \\
+    \hline
+    \end{tabular}
+    \label{quadro1}
+\end{quadro}
+
+```
+
 Como pode ser observado pelo @fig-4, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
 
 Algo que também vale a pena ser obversado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana de IMC por atletas por esporte.
+
+Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, todas em um pouco acima de 22. Algo que também vale a pena ser ressaltado é a grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 3,86 e 5,12. Isso pode ser explicado pela grande diversidade de modalidades que englobam o atletismo e a diferença entre categorias presentes no judô.
 
 ## Relação entre medalhistas e o tipo de medalha
 
 O sonho de cada atleta que adentra uma Olimpíadas é conquistar alguma medalha para seu país. Para isso é necessário anos de dedicação, treinos intensos e muito talento para ter uma chance de conquistar a tão sonhada medalha. Graças à combinação de todos esses fatores, existem competidores que conseguem atingir um maior sucesso que os demais, adquirindo um grande total de medalhas ao longo de vários anos.
 
-A fim de tentar entender melhor quais são os atletas que possuem mais medalhas entre as Olimpíadas de 2000 até 2016, foi feita uma análise descritiva utilizando as váriaveis: "Nomes" (qualitativa nominal), "Medalha" (qualitativa ordinal), significando respectivamente: o nome dos atletas participantes; medalha conquistada e seu tipo, sendo estes, ouro, prata e bronze. Além dessas variáveis, foi utilizado a figura a seguir:
+A fim de tentar entender melhor quais são os atletas que possuem mais medalhas entre as Olimpíadas de 2000 até 2016, foi feita uma análise descritiva utilizando as váriaveis: "Nomes" (qualitativa nominal), "Medalha" (qualitativa ordinal), significando respectivamente: o nome dos atletas participantes; medalha conquistada e seu tipo, sendo estes, ouro, prata e bronze. Além dessas variáveis, foi utilizado a figura e a tabela a seguir:
 
 ```{r}
 #| echo: false
@@ -542,7 +582,7 @@ ggplot(total) +
 
 ```{=latex}
 
-\begin{table}[]
+\begin{table}[H]
 \caption{Frequências da variável Medalha}
 \centering
 \begin{tabular}{@{}l|rr@{}}
@@ -553,6 +593,7 @@ Prata                    & 10                                      & 19,23\%    
 Bronze                   & 10                                      & 19,23\%                                  \\ \midrule
 \textbf{Total}           & 52                                      & 100,00\%                                 \\ \bottomrule
 \end{tabular}
+\label{tabela1}
 \end{table}
 ```
 
@@ -562,7 +603,7 @@ Nesta análise também foi estudado se há ou não uma associação entre o tipo
 
 Graças ao Coeficiente estudado, podemos dizer que uma certa relação entre o tipo da medalha conquistada e atleta que a conquistou, mostrando que o talento individual, além de anos de treino e esforço, pode ser um fator determinante quanto o assunto se trata de uma conquista grande.
 
-Algo que também vale a pena ser ressaltado é o número de medalhas de ouro conquistadas pelos 3 maiores ganhadores das Olimpíadas de 2000 até 2016, representando 61,54% do total de medalhas ganhas por esses atletas, assim como mostrado na tabela acima. Porém, dessas 32 medalhas de ouro, 28 são do Michael Phelps, o equivalente ao 87,50% desse total.
+Como mostrado na tabela acima, algo que também vale a pena ser ressaltado é o número de medalhas de ouro conquistadas pelos 3 maiores ganhadores das Olimpíadas de 2000 até 2016, representando 61,54% do total de medalhas ganhas por esses atletas. Porém, dessas 32 medalhas de ouro, 28 são do Michael Phelps, o equivalente ao 87,50% desse total.
 
 ## Relação entre peso e altura
 
@@ -608,7 +649,7 @@ ggplot(peso_altura) +
 		Máximo & 2,19 \\
 	\hline
 	\end{tabular}
-	\label{quadro1}
+	\label{quadro2}
 \end{quadro}
 
 ```
@@ -636,7 +677,7 @@ ggplot(peso_altura) +
 		Máximo & 175 \\
 	\hline
 	\end{tabular}
-	\label{quadro2}
+	\label{quadro3}
 \end{quadro}
 
 ```
