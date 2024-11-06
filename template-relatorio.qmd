@@ -16,7 +16,6 @@ source("rdocs/source/packages.R")
 setwd("~/GitHub/Projeto-Fanstasma-2")
 library(tidyverse)
 library(readxl)
-library(rcompanion)
 library(ggplot2)
 Olimpiadas_A <- read_excel("Olimpiadas 2000 - 2016.xlsx", 
                            sheet = "Athina")
@@ -184,6 +183,83 @@ peso_altura <- peso_altura %>%
   filter(!is.na(`Peso (kg)`))
 
 peso_altura <- distinct(peso_altura)
+
+#Tabelas
+
+print_quadro_resumo <- function(data, var_name, title="Medidas resumo da(o) [nome da variável]", label="quad:quadro_resumo1"){
+  var_name <- substitute(var_name)
+  data <- data %>%
+    summarize(`Média` = round(mean(!!sym(var_name)),2),
+              `Desvio Padrão` = round(sd(!!sym(var_name)),2),
+              `Variância` = round(var(!!sym(var_name)),2),
+              `Mínimo` = round(min(!!sym(var_name)),2),
+              `1º Quartil` = round(quantile(!!sym(var_name), probs = .25),2),
+              `Mediana` = round(quantile(!!sym(var_name), probs = .5),2),
+              `3º Quartil` = round(quantile(!!sym(var_name), probs = .75),2),
+              `Máximo` = round(max(!!sym(var_name)),2)) %>%
+    t() %>%
+    as.data.frame() %>%
+    rownames_to_column()
+  latex <- str_c("\\begin{quadro}[H]
+\t\\setlength{\t\\tabcolsep}{9pt}
+\t\\renewcommand{\t\\arraystretch}{1.20}
+\t\\caption{", title, "}
+\t\\centering
+\t\\begin{adjustbox}{max width=\\textwidth}
+\t\\begin{tabular} {", sep="")
+  col_count <- ncol(data)
+  row_count <- nrow(data)
+  latex <- str_c(latex, "| l |\n", sep=" ")
+  for (i in seq(2, col_count))
+  {
+    numCount <- data[i, -c(1)] %>%
+      as.numeric() %>%
+      {floor(log10(.)) + 1} %>%
+      max()
+    latex <- str_c(latex, "\t\t\tS[table-format = ", numCount ,".2]\n", sep="")
+  }
+  latex <- str_c(latex, "\t\t\t|}\n\t\\hline\n\t\t", sep="")
+  if (col_count > 2)
+  {
+    for (i in seq(1,col_count))
+    {
+      if (i == 1)
+        latex <- str_c(latex, "\\textbf{Estatística}", sep="")
+      else
+        latex <- str_c(latex, " \\textbf{", data[1, i], "}", sep="")
+      if (i < col_count)
+        latex <- str_c(latex, "&", sep=" ")
+      else
+        latex <- str_c(latex, "\\\\\n", sep=" ")
+    }
+  }
+  else
+  {
+    latex <- str_c(latex, "\\textbf{Estatística} & \\textbf{Valor} \\\\\n", sep="")
+  }
+  latex <- str_c(latex, "\t\t\\hline\n", sep="")
+  if (col_count > 2)
+    starting_number <- 2
+  else
+    starting_number <- 1
+  for (i in seq(starting_number, row_count))
+  {
+    latex <- str_c(latex, "\t\t", str_flatten(t(data[i,]), collapse = " & "), " \\\\\n")
+  }
+  latex <- str_c(latex, "\t\\hline
+\t\\end{tabular}
+\t\\label{", label, "}
+\t\\end{adjustbox}
+\\end{quadro}", sep="")
+  writeLines(latex)
+}
+
+peso_altura %>%
+  print_quadro_resumo(var_name = "Altura (m)")
+
+peso_altura %>%
+  print_quadro_resumo(var_name = "Peso (kg)")
+
 
 ```
 
@@ -394,8 +470,7 @@ ggplot(medalhas2) +
   ) +
   labs(x = "Países", y = "Frequência de Medalhistas") +
   theme_estat()
-ggsave("colunas-uni-freq.pdf", width = 158, height = 93, units = "mm"
-)
+
 ```
 
 Como pode ser observado pelo @fig-3, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 146, representando 16,1% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 7,2% para o segundo colocado Rússia.
@@ -426,6 +501,7 @@ ggplot(IMC_por_esporte) +
     fun = "mean", geom = "point", shape = 23, size = 3, fill = "white") +
   labs(x = "Esporte", y = "Índice de Massa Corporal") +
   theme_estat()
+
 ```
 
 Como pode ser observado pelo @fig-4, os atletas de ginástica são os que apresentam menor mediana em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
@@ -461,6 +537,23 @@ ggplot(total) +
   ) +
   labs(x = "Atletas", y = "Frequência") +
   theme_estat()
+
+```
+
+```{=latex}
+
+\begin{table}[]
+\caption{Frequências da variável Medalha}
+\centering
+\begin{tabular}{@{}l|rr@{}}
+\toprule
+\textbf{Medalha} & \multicolumn{1}{l}{\textbf{Frequência}} & \multicolumn{1}{l}{\textbf{Porcentagem}} \\ \midrule
+Ouro                     & 32                                      & 61,54\%                                  \\
+Prata                    & 10                                      & 19,23\%                                  \\
+Bronze                   & 10                                      & 19,23\%                                  \\ \midrule
+\textbf{Total}           & 52                                      & 100,00\%                                 \\ \bottomrule
+\end{tabular}
+\end{table}
 ```
 
 Como pode ser observado pela @fig-5, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,1%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
@@ -469,11 +562,13 @@ Nesta análise também foi estudado se há ou não uma associação entre o tipo
 
 Graças ao Coeficiente estudado, podemos dizer que uma certa relação entre o tipo da medalha conquistada e atleta que a conquistou, mostrando que o talento individual, além de anos de treino e esforço, pode ser um fator determinante quanto o assunto se trata de uma conquista grande.
 
+Algo que também vale a pena ser ressaltado é o número de medalhas de ouro conquistadas pelos 3 maiores ganhadores das Olimpíadas de 2000 até 2016, representando 61,54% do total de medalhas ganhas por esses atletas, assim como mostrado na tabela acima. Porém, dessas 32 medalhas de ouro, 28 são do Michael Phelps, o equivalente ao 87,50% desse total.
+
 ## Relação entre peso e altura
 
 Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos. E nas Oimpíadas não é diferente, em muitos esportes, possuir uma certa faixa de peso ou uma altura maior, acaba se tornando uma vantagem.
 
-A fim de tentar compreender melhor essa possível relação, foi feita uma análise descrita, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa contínua) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para compreender melhor está análise foi feita a seguinte figura:
+A fim de tentar compreender melhor essa possível relação, foi feita uma análise descritiva, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa contínua) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para compreender melhor está análise foi feita a seguinte figura e os seguintes quadros:
 
 ```{r}
 #| label: fig-6
@@ -490,10 +585,66 @@ ggplot(peso_altura) +
   geom_jitter(colour = "#A11D21")
 ```
 
-Como pode ser observado pela @fig-6, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos.
+```{=latex}
 
-Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,832, demonstrando que existe uma relação forte e positiva entre o peso e a altura das pessoas, o qual mostra que as duas variáveis são diretamente proporcionais, ou seja, quanto maior a altura de um indivíduo, maior tende a ser sua altura.
+\begin{quadro}[H]
+	\setlength{	\tabcolsep}{9pt}
+	\renewcommand{\arraystretch}{1.20}
+	\caption{Medidas resumo da Altura}
+	\centering
+	\begin{tabular} { | l |
+			S[table-format = 0.2]
+			|}
+	\hline
+		\textbf{Estatística} & \textbf{Valor} \\
+		\hline
+		Média & 1,78 \\
+		Desvio Padrão & 0,12 \\
+		Variância & 0,01 \\
+		Mínimo & 1,37 \\
+		1º Quartil & 1,7 \\
+		Mediana & 1,78 \\
+		3º Quartil & 1,86 \\
+		Máximo & 2,19 \\
+	\hline
+	\end{tabular}
+	\label{quadro1}
+\end{quadro}
 
-Essa grande correlação pode ser explicada pelo fato de quanto mais alto é o indivíduo, os músculos e a estrutura óssea dessa pessoa também tendem a ser maiores, gerando assim um maior valor de peso para tal.
+```
+
+```{=latex}
+
+\begin{quadro}[H]
+	\setlength{	\tabcolsep}{9pt}
+	\renewcommand{\arraystretch}{1.20}
+	\caption{Medidas resumo do Peso}
+	\centering
+	\begin{tabular} { | l |
+			S[table-format = 2.2]
+			|}
+	\hline
+		\textbf{Estatística} & \textbf{Valor} \\
+		\hline
+		Média & 74,14 \\
+		Desvio Padrão & 16,25 \\
+		Variância & 264,11 \\
+		Mínimo & 28 \\
+		1º Quartil & 63 \\
+		Mediana & 72 \\
+		3º Quartil & 84 \\
+		Máximo & 175 \\
+	\hline
+	\end{tabular}
+	\label{quadro2}
+\end{quadro}
+
+```
+
+Como pode ser observado pela @fig-6, uma grande parte da amostra analisada possui entre 1,50 e 2,00 metros, e de forma semelhante, os atletas se encontram na faixa de peso entre 50 a 100 quilos, sendo destacada pela área mais densa do gráfico.
+
+Para analisar sua correlação, foi utilizado o coeficiente de correlação de Spearman, o qual obteve um valor de $\rho$ = 0,832, demonstrando que a relação é forte e positiva entre o peso e a altura das pessoas, o qual mostra que as duas variáveis são diretamente proporcionais, ou seja, quanto maior a altura de um indivíduo, maior tende a ser sua altura.
+
+Como pode ser observado pelos quadros acima, a altura não apresenta uma grande variação com somente 0,12 de desvio padrão. Contudo, o peso existe uma grande variabilidade o qual possui 16,25 de desvio padrão mostrando que apesar de os competidores não haveram muita diferença quando se trata da altura, o peso muda consideravelmente, também sendo evidenciado pela sua diferença de 147 quilogramas entre o indivíduo mais pesado e o mais leve.
 
 # Conclusões
