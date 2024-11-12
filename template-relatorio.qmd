@@ -256,7 +256,7 @@ med(X) =
          X_{\frac{n+1}{2}}, \textrm{para n ímpar} \\
          \frac{X_{\frac{n}{2}}+X_{\frac{n}{2} + 1}}{2}, \textrm{para n par} \\
     \end{cases}
-$$ 
+$$
 
 ## Quartis
 
@@ -569,7 +569,6 @@ ggplot(peso_altura) +
     \end{tabular}
     \label{quadro2}
 \end{quadro}
-
 \begin{quadro}[H]
     \setlength{ \tabcolsep}{9pt}
     \renewcommand{\arraystretch}{1.20}
