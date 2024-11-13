@@ -206,7 +206,7 @@ peso_altura <- distinct(peso_altura)
 
 Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo utilizado diversos gráficos, tabelas, quadros e também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho e possíveis relações desses atletas de elite da academia de alta performance “House of Excellence”.
 
-O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.017 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, quanto quantitivas, nominais e ordinais.
+O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.017 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, quanto quantitativas, nominais e ordinais.
 
 O software utilizado para a realização desta análise é o R, sendo este um software livre em sua versão 4.3.3.
 
@@ -393,7 +393,7 @@ Vale ressaltar que o coeficiente de Pearson é paramétrico e, portanto, sensív
 
 Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, o investimento se tornou ainda maior.
 
-Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente, o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes ouro, prata ou bronze; o país que o atleta representou.
+Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente, o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes: ouro, prata ou bronze; o país que o atleta representou.
 
 Utilizando dessas variáveis, este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
 
@@ -414,9 +414,9 @@ ggplot(medalhas2) +
 
 ```
 
-Como pode ser observado pela @fig-3, os Estados Unidos possui o maior número de medalhas quanto se trata de atletas femininas, com um total de 443, representando 13,7% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 4,5% para o segundo colocado Rússia.
+Como pode ser observado pela @fig-3, os Estados Unidos possuem o maior número de atletas femininas que conquistaram medalhas olímpicas, com um total de 443, representando 13,7% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 4,5% para o segundo colocado Rússia.
 
-Essa diferença pode ser explicada pelo alto investimento que os Estados Unidos faz em suas atletas desde a infância, as incentivando a participarem em esportes de alto rendimento em toda sua fase de educação.
+Essa diferença pode ser explicada pelo alto investimento que os Estados Unidos fazem em suas atletas desde a infância, as incentivando a participarem em esportes de alto rendimento em toda sua fase de educação.
 
 Vale a pena ser ressaltado a grande variedade de continentes presentes dentro do top 5 medalhistas femininas, sendo estes: América, Europa, Ásia e Oceania, mostrando que existe uma variedade muito grande entre as atletas ganhadoras.
 
@@ -426,7 +426,7 @@ Algo que também deve ser observado é a frequência relativa acumulada entre es
 
 O Índice de Massa Corporal, mais conhecido como IMC, é uma medida internacional adotada para verificar se uma pessoa estaria numa certa faixa de "peso ideal". Esse índice varia por diversos aspectos e, entre um deles, está se a pessoa pratica ou não algum esporte.
 
-Para esta análise, foram utilizadas as váriaveis: "Altura (m)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em metros; peso de cada atleta em quilogramas; esporte que o competidor participou.
+Para esta análise, foram utilizadas as variáveis: "Altura (m)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em metros; peso de cada atleta em quilogramas; esporte que o competidor participou.
 
 A fim de tentar compreender melhor essa relação, foi feita uma análise descritiva entre alguns dos esportes olímpicos e seus atletas, demonstrado pela figura e quadro abaixo:
 
@@ -448,7 +448,7 @@ ggplot(IMC_por_esporte) +
 \begin{quadro}[H]
     \setlength{ \tabcolsep}{9pt}
     \renewcommand{\arraystretch}{1.20}
-    \caption{Medidas resumo do Índice de Massa Corporal]}
+    \caption{Medidas resumo do Índice de Massa Corporal}
     \centering
     \begin{tabular} { | l |
             S[table-format = 2.2]
@@ -473,7 +473,7 @@ ggplot(IMC_por_esporte) +
     \label{quad:quadro_resumo1}
 \end{quadro}
 
-Como pode ser observado pela @fig-4, os atletas de ginástica são os que apresentam menor mediana (21,09) em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato dos atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
+Como pode ser observado pela @fig-4, os atletas de ginástica são os que apresentam menor mediana (21,09) em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato de os atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
 
 Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte.
 
@@ -483,7 +483,7 @@ Como pode ser observado pelo quadro acima, a média entre os atletas de atletism
 
 O sonho de cada atleta que adentra uma Olimpíadas é conquistar alguma medalha para seu país. Para isso é necessário anos de dedicação, treinos intensos e muito talento para ter uma chance de conquistar a tão sonhada medalha. Graças à combinação de todos esses fatores, existem competidores que conseguem atingir um maior sucesso que os demais, adquirindo um grande total de medalhas ao longo de vários anos.
 
-A fim de tentar entender melhor quais são os atletas que possuem mais medalhas entre as Olimpíadas de 2000 até 2016, foi feita uma análise descritiva utilizando as váriaveis: "Nomes" (qualitativa nominal), "Medalha" (qualitativa ordinal), significando respectivamente: o nome dos atletas participantes; medalha conquistada e seu tipo, sendo estes, ouro, prata e bronze. Além dessas variáveis, foi utilizado a figura e a tabela a seguir:
+A fim de tentar entender melhor quais são os atletas que possuem mais medalhas entre as Olimpíadas de 2000 até 2016, foi feita uma análise descritiva utilizando as variáveis: "Nomes" (qualitativa nominal), "Medalha" (qualitativa ordinal), significando respectivamente: o nome dos atletas participantes; medalha conquistada e seu tipo, sendo estes: ouro, prata e bronze. Além dessas variáveis, foi utilizado a figura e a tabela a seguir:
 
 ```{r}
 #| echo: false
@@ -524,13 +524,13 @@ Bronze                   & 10                                      & 19,23\%    
 \label{tabela1}
 \end{table}
 
-Como pode ser observado pela @fig-5, o atleta Michael Phelps é quem detem o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,10%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
+Como pode ser observado pela @fig-5, o atleta Michael Phelps é quem detém o maior número de medalhas olímpicas entre 2000 até 2016, totalizando 28 medalhas, dentre elas 23 sendo de ouro, representando 82,10%. Para fechar o top 3 tem a atleta Natalie Coughlin e Ryan Lochte, ambos empatados no total de medalhas com 12 cada.
 
 Como é evidenciado pelo quadro acima em conjunto com a @fig-5, existe uma certa relação quanto ao tipo da medalha conquistada e o atleta que a conquistou. Essa relação fica ainda mais evidente quando analisado o número de medalhas de ouro conquistadas pelos 3 maiores ganhadores das Olimpíadas de 2000 até 2016, representando 61,54% do total de medalhas ganhas por esses atletas. Porém, dessas 32 medalhas de ouro, 28 são do Michael Phelps, o equivalente a 87,50% desse total.
 
 ## Relação entre peso e altura
 
-Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos. Nas Oimpíadas não é diferente, em muitos esportes, possuir uma certa faixa de peso ou uma altura maior, acaba se tornando uma vantagem.
+Algo bastante comum na fase de crescimento de todos os seres vivos é o aumento tanto de peso quanto de altura, podendo variar bastante os dois dependendo de cada indivíduo. Porém, isso nem sempre acontece, havendo uma grande variedade possível de alturas e pesos diferentes para todos. Nas Olimpíadas não é diferente, em muitos esportes, possuir uma certa faixa de peso ou uma altura maior, acaba se tornando uma vantagem.
 
 A fim de tentar compreender melhor essa possível relação, foi feita uma análise descritiva, estudando sua correlação, utilizando das variáveis: "Peso (kg)" (quantitativa contínua) e "Altura (m)" (quantitativa contínua), possuindo seus respectivos significados: peso em quilogramas de cada atleta; altura em metros de cada competidor. Para compreender melhor esta análise foi feita a seguinte figura e o seguinte quadro:
 
@@ -540,13 +540,12 @@ A fim de tentar compreender melhor essa possível relação, foi feita uma anál
 
 ggplot(peso_altura) +
   aes(x = `Peso (kg)`, y = `Altura (m)`) +
-  geom_point(colour = "#A11D21", size = 3, alpha= 0.7) +
+  geom_point(colour = "#A11D21", size = 3, alpha= 0.4) +
   labs(
     x = "Peso",
     y = "Altura"
   ) +
-  theme_estat() +
-  geom_jitter(colour = "#A11D21")
+  theme_estat()
 
 ```
 
@@ -579,11 +578,11 @@ Como pode ser observado pela @fig-6, uma grande parte da amostra analisada possu
 
 Para analisar sua correlação, foi utilizado o coeficiente de correlação de Pearson, o qual obteve um valor de $r$ = 0,795, demonstrando que a relação é forte e positiva entre o peso e a altura das pessoas, o qual mostra que as duas variáveis são diretamente proporcionais, ou seja, quanto maior a altura de um indivíduo, maior tende a ser seu peso.
 
-Como pode ser observado pelo quadro acima, a altura não apresenta uma grande variação com somente 0,12 de desvio padrão. Contudo, o peso existe uma grande variabilidade o qual possui 16,25 de desvio padrão mostrando que apesar de os competidores não haveram muita diferença quando se trata da altura, o peso muda consideravelmente, também sendo evidenciado pela sua diferença de 147 quilogramas entre o indivíduo mais pesado e o mais leve.
+Como pode ser observado pelo quadro acima, a altura não apresenta uma grande variação com somente 0,12 de desvio padrão. Contudo, o peso existe uma grande variabilidade o qual possui 16,25 de desvio padrão mostrando que apesar de os competidores não haverem muita diferença quando se trata da altura, o peso muda consideravelmente, também sendo evidenciado pela sua diferença de 147 quilogramas entre o indivíduo mais pesado e o mais leve.
 
 # Conclusões
 
-Como pode ser visto nesse relatório, para um país se tornar bastante vencedor em diversos esportes nas Olimpíadas, vários fatores devem ser levados em questão, como peso, altura e até a idade impactam no desempenho. Porém, somente esforço e talento dos atletas não são suficentes para se tornar campeão de determinado esporte, deve-se também ser acompanhado de um grande investimento em saúde, academia, psicólogo e diversos outros fatores importantes.
+Como pode ser visto nesse relatório, para um país se tornar bastante vencedor em diversos esportes nas Olimpíadas, vários fatores devem ser levados em questão, como peso, altura e até a idade impactam no desempenho. Porém, somente esforço e talento dos atletas não são suficientes para se tornar campeão de determinado esporte, deve-se também ser acompanhado de um grande investimento em saúde, academia, psicólogo e diversos outros fatores importantes.
 
 Todos esses quesitos podem ser observados pelos países presentes na @fig-3, que mesmo possuindo excelentes atletas, o investimento na área é pesado, assegurando não somente uma boa qualidade de vida para eles, mas também um futuro dentro do esporte.
 

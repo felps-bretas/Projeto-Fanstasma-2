@@ -782,9 +782,10 @@ A um nível de significância $\alpha$ de erro, sob a hipótese $H_{0}$ verdadei
 
 O teste de Wilcoxon-Mann-Whitney ou apenas Mann-Whitney é utilizado para comparar dois grupos independentes sem supor nenhuma distribuição. Isso ocorre pois o teste baseia-se em postos atribuídos a cada observação da variável quantitativa após serem ordenadas. O teste considera as hipóteses:
 
-\hipoteses{As populações têm a mesma distribuição}{As populações têm distribuições distintas} 
+\hipoteses{As populações têm a mesma distribuição}{As populações têm distribuições distintas}
 
 Para cada caso a seguir, a estatística do teste se diferencia:
+
 \begin{itemize}
 \item [\bf a)] \textbf{Com nenhum ou poucos empates:}
 
@@ -1346,9 +1347,9 @@ Para o cálculo desse coeficiente, comparam-se os postos atribuídos às observa
 \end{tabular}
 \end{table}
 
-% \begin{table}[H]
-% \centering
-% \begin{tabular}{c|cc}
+\% \\begin{table}\[H\] % \centering %
+
+\begin{tabular}{c|cc}
 % \multicolumn{1}{l|}{}        & \multicolumn{2}{c}{\textbf{Sinal da variável Y}} \\ \hline
 % \textbf{Sinal da variável X} & \textbf{+}              & \textbf{-}             \\ \hline
 % \textbf{+}                   & (+, +)                  & (+, -)                 \\
