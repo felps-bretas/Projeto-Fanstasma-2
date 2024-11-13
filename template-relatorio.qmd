@@ -206,7 +206,7 @@ peso_altura <- distinct(peso_altura)
 
 Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo utilizado diversos gráficos, tabelas, quadros e também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho e possíveis relações desses atletas de elite da academia de alta performance “House of Excellence”.
 
-O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.015 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, quanto quantitivas, nominais e ordinais.
+O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.017 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, quanto quantitivas, nominais e ordinais.
 
 O software utilizado para a realização desta análise é o R, sendo este um software livre em sua versão 4.3.3.
 
