@@ -477,13 +477,22 @@ ggplot(IMC_por_esporte) +
     \label{quad:quadro_resumo1}
 \end{quadro}
 
-Como pode ser observado pela @fig-4, os atletas de ginástica são os que apresentam menor mediana (21,09) em relação aos outros esportes, esse valor abaixo dos demais talvez seja explicado por fatores externos que estejam interferindo nos resultados analisados.
+Como pode ser observado pela @fig-4 em conjunto com o quadro de medidas resumo, os atletas de atletismo são os que possuem a segunda maior variabilidade entre os atletas analisados, existindo uma grande diferença entre os valores de mínimo e de máximo. Há também uma diferença de somente 0,93 pontos entre o valor de sua média e sua mediana.
+
+O badminton por sua vez é o que apresenta a menor variabilidade entre os esportes em questão, com uma diferença somente de 7,79 entre seus valores de máximo e mínimo. Algo que também chama a atenção nesse esporte são seus valores de média e de mediana, os quais apresentam valores muito semelhantes entre si, com uma diferença entre os dois de somente 0,02.
+
+O futebol apresenta valores muito semelhantes quando comparado com o badminton, apresentando também uma diferença de somente 0,02 entre seus valores de média e mediana. Esse esporte também possui o segundo menor valor quando se trata de desvio padrão.
+
+A ginástica é a que apresenta o menor valor de média que os demais esportes analisados, com um valor de 20,69. Também pode ser observado um aumento de variabilidade quando analisado com badminton e futebol, em que esse esporte apresenta o menor valor de mínimo entre todos em questão. Esse esporte também possui a menor mediana que os demais, com o valor igual a 21,09. Esse resultado menor que os demais, pode ser explicado por valores externos que vão além do banco de dados fornecido, podendo estar interferindo nesse valor.
+
+O judô é o esporte que possui o maior valor de média, desvio padrão e mediana entre todos os esportes analisados. Ele também é o que possui a maior diferença entre os valores de mínimo e máximo, sendo este igual a 37,98.
 
 Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte. 
 
 Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, mesmo com a grande variabilidade presente entre os profissionais de atletismo, todas um pouco acima de 22.
 
-Algo que também vale a pena ser ressaltado é a grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 4,01 e 5,05.Algo que evidencia ainda mais essa grande variabilidade, são os valores máximos para esses esportes, sendo seus respectivos valores de 44,38 e 56,50. Em contrapartida, os atletas de badminton e futebol apresentaram os desvios padrões mais baixo, 1,59 e 1,77, respectivamente, evidenciando uma baixa variabilidade em relação aos demais.
+Como citado anteriormente, existe uma grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 4,01 e 5,05. Algo que evidencia ainda mais essa grande variabilidade, são os valores mínimos e máximos para esses esportes, sendo seus valores de 15,82 e 18,52 como mínimo e 44,38 e 56,50 como máximo para seus respectivos esportes. Em contrapartida, os atletas de badminton e futebol apresentaram os desvios padrões mais baixo, 1,59 e 1,77, respectivamente, evidenciando uma baixa variabilidade em relação aos demais.
+
 
 ## Relação entre medalhistas e o tipo de medalha
 
@@ -588,8 +597,10 @@ Como pode ser observado pelo quadro acima, a altura não apresenta uma grande va
 
 # Conclusões
 
-Como pode ser visto nesse relatório, para um país se tornar bastante vencedor em diversos esportes nas Olimpíadas, vários fatores devem ser levados em questão, como peso, altura e até a idade impactam no desempenho. Porém, somente esforço e talento dos atletas não são suficientes para se tornar campeão de determinado esporte, deve-se também ser acompanhado de um grande investimento em saúde, academia, psicólogo e diversos outros fatores importantes.
+A análise sobre a relação entre o número de mulheres medalhistas, é possível observar a grande quantidade de medalhas conquistadas pelo Estados Unidos. Essa quantia maior que os demais, pode ser explicado por diversos fatores externos que afetam o desempenho dos atletas que não é mostrado somente pela análise do banco de dados.
 
-Todos esses quesitos podem ser observados pelos países presentes na @fig-3, que mesmo possuindo excelentes atletas, o investimento na área é pesado, assegurando não somente uma boa qualidade de vida para eles, mas também um futuro dentro do esporte.
+Sobre a análise da possível relação entre o IMC dos atletas e seus respectivos esportes, não é possível dizer se ela realmente existe. Contudo, quando analisado a existência de uma relação entre o peso e altura, sendo essas as duas variáveis utilizadas no cálculo do Índice de Massa Corporal, é factível uma correlação entre essas duas. 
 
-Graças as Olimpíadas, esse estudo também mostra a grande variedade de competidores que participaram das competições de 2000 até 2016, apresentando uma grande variedade em todos os aspectos analisados.
+Como visto na análise entre o medalhista e o tipo de medalha conquistada, é possível concluir que existe algum tipo de relação entre essas duas variáveis, havendo uma predominância de certos nomes em determinadas medalhas.
+
+A partir das análises feitas neste relatório, pode-se concluir que existem várias variáveis e fatores externos que possam influenciar o desempenho desses atletas em seus respectivos esportes, aonde diversas dessas variáveis podem acabar se relacionando entre si, afetando ainda mais a conquista de uma ou mais medalhas.
