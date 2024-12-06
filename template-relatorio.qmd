@@ -1,7 +1,6 @@
 ---
 title: "Relatório Olimpíadas 2000 - 2016"
 
-# Nome do documento PDF gerado
 output-file: Projeto Fantasma
 ---
 
@@ -395,7 +394,7 @@ Vale ressaltar que o coeficiente de Pearson é paramétrico e, portanto, sensív
 
 Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, o investimento se tornou ainda maior.
 
-Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente, o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes: ouro, prata ou bronze; o país que o atleta representou.
+Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente: o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes: ouro, prata ou bronze; o país que o atleta representou.
 
 Utilizando dessas variáveis, este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
 
@@ -416,9 +415,7 @@ ggplot(medalhas2) +
 
 ```
 
-Como pode ser observado pela @fig-3, os Estados Unidos possuem o maior número de atletas femininas que conquistaram medalhas olímpicas, com um total de 443, representando 13,7% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 4,5% para o segundo colocado Rússia.
-
-Essa diferença pode ser explicada pelo alto investimento que os Estados Unidos fazem em suas atletas desde a infância, as incentivando a participarem em esportes de alto rendimento em toda sua fase de educação.
+Como pode ser observado pela @fig-3, os Estados Unidos possuem o maior número de atletas femininas que conquistaram medalhas olímpicas, com um total de 443, representando 13,7% no total de medalhistas mulheres das Olimpíadas de 2000 até 2016, havendo uma diferença de 4,5% para o segundo colocado Rússia. Essa grande diferença percentual entre o primeiro e segundo colocado pode ser explicada por fatores externos que podem estar afetando essa grande diferença entre os dois.
 
 Vale a pena ser ressaltado a grande variedade de continentes presentes dentro do top 5 medalhistas femininas, sendo estes: América, Europa, Ásia e Oceania, mostrando que existe uma variedade muito grande entre as atletas ganhadoras.
 
@@ -426,9 +423,7 @@ Algo que também deve ser observado é a frequência relativa acumulada entre es
 
 ## Relação do IMC por esporte
 
-O Índice de Massa Corporal, mais conhecido como IMC, que possui como fórmula:
-$$IMC=\frac {peso (kg)}{(altura (m))^2}$$
-É uma medida internacional importante que tem como objetivo identificar se uma pessoa está com peso ideal, abaixo ou acima deste, podendo reconhecer possíveis condições de baixo peso, sobrepeso ou obesidade, ajudando na prevenção de doenças graves, como diabetes e hipertensão.
+O Índice de Massa Corporal, mais conhecido como IMC, que possui como fórmula: $$IMC=\frac {peso (kg)}{(altura (m))^2}$$ É uma medida internacional importante que tem como objetivo identificar se uma pessoa está com peso ideal, abaixo ou acima deste, podendo reconhecer possíveis condições de baixo peso, sobrepeso ou obesidade, ajudando na prevenção de doenças graves, como diabetes e hipertensão.
 
 Para esta análise, foram utilizadas as variáveis: "Altura (m)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em metros; peso de cada atleta em quilogramas; esporte que o competidor participou.
 
@@ -487,12 +482,11 @@ A ginástica é a que apresenta o menor valor de média que os demais esportes a
 
 O judô é o esporte que possui o maior valor de média, desvio padrão e mediana entre todos os esportes analisados. Ele também é o que possui a maior diferença entre os valores de mínimo e máximo, sendo este igual a 37,98.
 
-Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte. 
+Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte.
 
 Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, mesmo com a grande variabilidade presente entre os profissionais de atletismo, todas um pouco acima de 22.
 
 Como citado anteriormente, existe uma grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 4,01 e 5,05. Algo que evidencia ainda mais essa grande variabilidade, são os valores mínimos e máximos para esses esportes, sendo seus valores de 15,82 e 18,52 como mínimo e 44,38 e 56,50 como máximo para seus respectivos esportes. Em contrapartida, os atletas de badminton e futebol apresentaram os desvios padrões mais baixo, 1,59 e 1,77, respectivamente, evidenciando uma baixa variabilidade em relação aos demais.
-
 
 ## Relação entre medalhistas e o tipo de medalha
 
@@ -599,7 +593,7 @@ Como pode ser observado pelo quadro acima, a altura não apresenta uma grande va
 
 A análise sobre a relação entre o número de mulheres medalhistas, é possível observar a grande quantidade de medalhas conquistadas pelo Estados Unidos. Essa quantia maior que os demais, pode ser explicado por diversos fatores externos que afetam o desempenho dos atletas que não é mostrado somente pela análise do banco de dados.
 
-Sobre a análise da possível relação entre o IMC dos atletas e seus respectivos esportes, não é possível dizer se ela realmente existe. Contudo, quando analisado a existência de uma relação entre o peso e altura, sendo essas as duas variáveis utilizadas no cálculo do Índice de Massa Corporal, é factível uma correlação entre essas duas. 
+Sobre a análise da possível relação entre o IMC dos atletas e seus respectivos esportes, não é possível dizer se ela realmente existe. Contudo, quando analisado a existência de uma relação entre o peso e altura, sendo essas as duas variáveis utilizadas no cálculo do Índice de Massa Corporal, é factível uma correlação entre essas duas.
 
 Como visto na análise entre o medalhista e o tipo de medalha conquistada, é possível concluir que existe algum tipo de relação entre essas duas variáveis, havendo uma predominância de certos nomes em determinadas medalhas.
 
