@@ -7,7 +7,9 @@ output-file: Projeto Fantasma
 
 ```{r}
 #| include: false
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 source("rdocs/source/packages.R")
+
 ```
 
 ```{r}
@@ -204,11 +206,11 @@ peso_altura <- distinct(peso_altura)
 
 # Introdução
 
-Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo utilizado diversos gráficos, tabelas, quadros e também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho e possíveis relações desses atletas de elite da academia de alta performance “House of Excellence”.
+Este relatório tem como objetivo um estudo mais aprofundado, por meio de análises descritivas, sendo utilizado diversos gráficos, tabelas, quadros e também analisadas suas correlações, sobre a performance de atletas nas Olimpíadas dos anos 2000 até 2016, a fim de entender melhor o desempenho e possíveis relações desses atletas medalhistas entre essas edições desse grandioso torneio. Neste relatório foram feitas 4 análises, sendo estas: o número de mulheres medalhistas por país, sendo analisado os 5 maiores ganhadores; se existe uma possível relação entre atletas de determinados esportes e sua taxa de IMC; se existe algum tipo de relação entre o atleta medalhista e o tipo de medalha que ele conquistou e por fim, se existe alguma relação entre o peso e a altura desses atletas.
 
-O banco de dados foi coletado pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.017 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, quanto quantitativas, nominais e ordinais.
+O banco de dados foi fornecido pelo próprio cliente, possuindo uma boa amostra para fins de estudo contendo um total de 9 variáveis e 10.017 observações presentes para a confecção da análise, possuindo variáveis tanto qualitativas, discretas e contínuas, como país de origem de cada atleta, nomes, quanto quantitativas, nominais e ordinais, como altura e peso dos atletas medalhistas.
 
-O software utilizado para a realização desta análise é o R, sendo este um software livre em sua versão 4.3.3.
+Os softwares utilizados para a realização destas análises são o R na versão 4.3.3. e o Rstudio.
 
 # Referencial Teórico
 
@@ -424,11 +426,13 @@ Algo que também deve ser observado é a frequência relativa acumulada entre es
 
 ## Relação do IMC por esporte
 
-O Índice de Massa Corporal, mais conhecido como IMC, é uma medida internacional adotada para verificar se uma pessoa estaria numa certa faixa de "peso ideal". Esse índice varia por diversos aspectos e, entre um deles, está se a pessoa pratica ou não algum esporte.
+O Índice de Massa Corporal, mais conhecido como IMC, que possui como fórmula:
+$$IMC=\frac {peso (kg)}{(altura (m))^2}$$
+É uma medida internacional importante que tem como objetivo identificar se uma pessoa está com peso ideal, abaixo ou acima deste, podendo reconhecer possíveis condições de baixo peso, sobrepeso ou obesidade, ajudando na prevenção de doenças graves, como diabetes e hipertensão.
 
 Para esta análise, foram utilizadas as variáveis: "Altura (m)" (quantitativa contínua), "Peso (kg)" (quantitativa contínua) e "Esporte" (qualitativa nominal), significando respectivamente: altura de cada atleta participante em metros; peso de cada atleta em quilogramas; esporte que o competidor participou.
 
-A fim de tentar compreender melhor essa relação, foi feita uma análise descritiva entre alguns dos esportes olímpicos e seus atletas, demonstrado pela figura e quadro abaixo:
+A fim de tentar compreender se existe uma possível relação entre o IMC de alguns atletas e seus respectivos esportes, foi feita uma análise descritiva demonstrado pela figura e quadro abaixo:
 
 ```{r}
 #| echo: false
@@ -473,11 +477,13 @@ ggplot(IMC_por_esporte) +
     \label{quad:quadro_resumo1}
 \end{quadro}
 
-Como pode ser observado pela @fig-4, os atletas de ginástica são os que apresentam menor mediana (21,09) em relação aos outros esportes. Uma explicação para esse motivo se dá pelo fato de os atletas de ginástica precisarem muito de sua mobilidade e agilidade para executarem suas acrobacias, necessitando de uma menor taxa de IMC para facilitar os movimentos.
+Como pode ser observado pela @fig-4, os atletas de ginástica são os que apresentam menor mediana (21,09) em relação aos outros esportes, esse valor abaixo dos demais talvez seja explicado por fatores externos que estejam interferindo nos resultados analisados.
 
-Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte.
+Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte. 
 
-Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, todas um pouco acima de 22. Algo que também vale a pena ser ressaltado é a grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 4,01 e 5,05. Isso pode ser explicado pela grande diversidade de modalidades que englobam o atletismo e a diferença entre as categorias presentes no judô.
+Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, mesmo com a grande variabilidade presente entre os profissionais de atletismo, todas um pouco acima de 22.
+
+Algo que também vale a pena ser ressaltado é a grande variabilidade presente entre os atletas de atletismo e principalmente os de judô, os quais possuem um desvio padrão respectivamente de 4,01 e 5,05.Algo que evidencia ainda mais essa grande variabilidade, são os valores máximos para esses esportes, sendo seus respectivos valores de 44,38 e 56,50. Em contrapartida, os atletas de badminton e futebol apresentaram os desvios padrões mais baixo, 1,59 e 1,77, respectivamente, evidenciando uma baixa variabilidade em relação aos demais.
 
 ## Relação entre medalhistas e o tipo de medalha
 
