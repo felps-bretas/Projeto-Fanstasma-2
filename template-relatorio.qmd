@@ -392,9 +392,9 @@ Vale ressaltar que o coeficiente de Pearson é paramétrico e, portanto, sensív
 
 ## Relação de mulheres medalhistas por país
 
-Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, o investimento se tornou ainda maior.
+Desde o século XX, as mulheres vêm ganhando espaço em diversas áreas de atuação que antes eram consideradas exclusivamente dos homens. Uma conquista muito grande do público feminino foi o ingresso nas Olimpíadas e, com a virada do século, as participações se tornaram ainda maiores.
 
-Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente: o gênero dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes: ouro, prata ou bronze; o país que o atleta representou.
+Para a confecção desta análise, foram utilizadas as variáveis: "Sexo" (qualitativa nominal), "Medalha" (qualitativa ordinal) e "País" (qualitativa nominal) que significam respectivamente: o sexo dos atletas participantes; se o atleta ganhou medalha e seu tipo, sendo estes: ouro, prata ou bronze; o país que o atleta representou.
 
 Utilizando dessas variáveis, este estudo tem como finalidade compreender quais foram os países que tiveram o maior número de medalhistas femininas nas Olimpíadas de 2000 até 2016, analisando os 5 que se saíram mais vencedores nessas edições, como é mostrado na figura a seguir:
 
@@ -482,7 +482,7 @@ A ginástica é a que apresenta o menor valor de média que os demais esportes a
 
 O judô é o esporte que possui o maior valor de média, desvio padrão e mediana entre todos os esportes analisados. Ele também é o que possui a maior diferença entre os valores de mínimo e máximo, sendo este igual a 37,98.
 
-Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, ainda apresentam a segunda menor mediana (21,46) de IMC por atletas por esporte.
+Algo que também vale a pena ser observado é o grande número de outliers nos competidores de atletismo, judô e futebol, evidenciando a diversidade possível para os atletas entrarem em suas competições. Porém, mesmo com essa grande presença desse outliers, o atletismo ainda apresenta a segunda menor mediana (21,46) de IMC por atletas por esporte.
 
 Como pode ser observado pelo quadro acima, a média entre os atletas de atletismo, badminton e futebol são bastante parecidas, mesmo com a grande variabilidade presente entre os profissionais de atletismo, todas um pouco acima de 22.
 
